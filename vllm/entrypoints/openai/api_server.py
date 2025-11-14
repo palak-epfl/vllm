@@ -2005,6 +2005,7 @@ if __name__ == "__main__":
     # NOTE(simon):
     # This section should be in sync with vllm/entrypoints/cli/main.py for CLI
     # entrypoints.
+    print("PALAK: HI THERE!!!!")
     cli_env_setup()
     parser = FlexibleArgumentParser(
         description="vLLM OpenAI-Compatible RESTful API server."

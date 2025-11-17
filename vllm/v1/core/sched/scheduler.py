@@ -1347,12 +1347,14 @@ class Scheduler(SchedulerInterface):
         spec_decoding_stats: SpecDecodingStats | None = None,
         kv_connector_stats: KVConnectorStats | None = None,
     ) -> SchedulerStats | None:
+        print("PALAK: make stats (IS THIS THE FUNCTION I HAVE BEEN LOOKING FOR?)")
+        print("PALAK: self.log_stats: ", self.log_stats)
         if not self.log_stats:
             return None
         prefix_cache_stats = self.kv_cache_manager.make_prefix_cache_stats()
         assert prefix_cache_stats is not None
         connector_prefix_cache_stats = self._make_connector_prefix_cache_stats()
-        return SchedulerStats(
+        temp_scheduler_stats = SchedulerStats(
             num_running_reqs=len(self.running),
             num_waiting_reqs=len(self.waiting),
             kv_cache_usage=self.kv_cache_manager.usage,
@@ -1361,6 +1363,8 @@ class Scheduler(SchedulerInterface):
             spec_decoding_stats=spec_decoding_stats,
             kv_connector_stats=kv_connector_stats.data if kv_connector_stats else None,
         )
+        print("PALAK: temp_scheduler_stats: ", temp_scheduler_stats)
+        return temp_scheduler_stats
 
     def make_spec_decoding_stats(
         self,

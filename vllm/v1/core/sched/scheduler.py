@@ -296,6 +296,7 @@ class Scheduler(SchedulerInterface):
                     print("PALAK: self.policy: ", self.policy)
 
                     if new_blocks is not None:
+                        print("PALAK: new_blocks not none so request can be scheduled")
                         # The request can be scheduled.
                         break
 
@@ -332,7 +333,7 @@ class Scheduler(SchedulerInterface):
                     else:
                         preempted_req = self.running.pop()
 
-                    print("PALAK: len(self.running): ", len(self.running))
+                    print("PALAK: len(self.running) after popping: ", len(self.running))
 
                     self.kv_cache_manager.free(preempted_req)
                     self.encoder_cache_manager.free(preempted_req)
@@ -350,6 +351,7 @@ class Scheduler(SchedulerInterface):
                         # No more request to preempt. Cannot schedule this request.
                         break
 
+            print("PALAK: new_blocks after exiting above while loop: ", new_blocks)
             if new_blocks is None:
                 # Cannot schedule this request.
                 break

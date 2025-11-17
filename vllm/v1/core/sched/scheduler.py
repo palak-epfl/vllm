@@ -225,6 +225,7 @@ class Scheduler(SchedulerInterface):
             request = self.running[req_index]
             print("PALAK: req_index: ", req_index)
             print("PALAK: request: ", request)
+            print("PALAK: len(self.running): ", len(self.running))
 
             num_new_tokens = (
                 request.num_tokens_with_spec
@@ -265,6 +266,7 @@ class Scheduler(SchedulerInterface):
                     encoder_compute_budget,
                 )
 
+            print("PALAK: is num_new_tokens == 0? ", num_new_tokens == 0)
             if num_new_tokens == 0:
                 # The request cannot be scheduled because one of the following
                 # reasons:

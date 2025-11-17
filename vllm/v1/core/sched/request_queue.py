@@ -147,10 +147,12 @@ class PriorityRequestQueue(RequestQueue):
 
     def add_request(self, request: Request) -> None:
         """Add a request to the queue according to priority policy."""
+        print("PALAK: inside request_queue add_request method")
         heapq.heappush(self._heap, (request.priority, request.arrival_time, request))
 
     def pop_request(self) -> Request:
         """Pop a request from the queue according to priority policy."""
+        print("PALAK: inside request_queue pop_request method")
         if not self._heap:
             raise IndexError("pop from empty heap")
         _, _, request = heapq.heappop(self._heap)
@@ -213,6 +215,8 @@ class PriorityRequestQueue(RequestQueue):
 
 def create_request_queue(policy: SchedulingPolicy) -> RequestQueue:
     """Create request queue based on scheduling policy."""
+    print("PALAK: inside request_queue create_request_queue method")
+    print("PALAK: policy: ", policy)
     if policy == SchedulingPolicy.PRIORITY:
         return PriorityRequestQueue()
     elif policy == SchedulingPolicy.FCFS:

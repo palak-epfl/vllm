@@ -198,6 +198,7 @@ class Scheduler(SchedulerInterface):
         # chunked prefills, prefix caching, speculative decoding,
         # and the "jump decoding" optimization in the future.
 
+        print("PALAK: inside scheduler.py schedule method")
         scheduled_new_reqs: list[Request] = []
         scheduled_resumed_reqs: list[Request] = []
         scheduled_running_reqs: list[Request] = []
@@ -215,11 +216,16 @@ class Scheduler(SchedulerInterface):
         # For logging.
         scheduled_timestamp = time.monotonic()
 
+        #### PALAK's comments
+        print("PALAK: len(self.running): ", len(self.running))
+
         # First, schedule the RUNNING requests.
         req_index = 0
         while req_index < len(self.running) and token_budget > 0:
             request = self.running[req_index]
-
+            print("PALAK: req_index: ", req_index)
+            print("PALAK: request: ", request)
+            
             num_new_tokens = (
                 request.num_tokens_with_spec
                 + request.num_output_placeholders

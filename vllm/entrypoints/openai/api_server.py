@@ -1937,6 +1937,7 @@ def setup_server(args):
 async def run_server(args, **uvicorn_kwargs) -> None:
     """Run a single-worker API server."""
 
+    print("PALAK: inside run_server method")
     # Add process-specific prefix to stdout and stderr.
     decorate_logs("APIServer")
 
@@ -1949,6 +1950,7 @@ async def run_server_worker(
 ) -> None:
     """Run a single API server worker."""
 
+    print("PALAK: inside run_server_worker")
     if args.tool_parser_plugin and len(args.tool_parser_plugin) > 3:
         ToolParserManager.import_tool_parser(args.tool_parser_plugin)
 
@@ -2015,4 +2017,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     validate_parsed_serve_args(args)
 
+    print("PALAK: starting run_server method")
     uvloop.run(run_server(args))

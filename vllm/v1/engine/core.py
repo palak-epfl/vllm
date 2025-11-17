@@ -317,7 +317,7 @@ class EngineCore:
         Returns tuple of outputs and a flag indicating whether the model
         was executed.
         """
-
+        print("PALAK: inside core.py step function")
         # Check for any requests remaining in the scheduler - unfinished,
         # or finished and not yet removed from the batch.
         if not self.scheduler.has_requests():

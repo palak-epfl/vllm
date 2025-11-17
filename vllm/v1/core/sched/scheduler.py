@@ -225,12 +225,15 @@ class Scheduler(SchedulerInterface):
             request = self.running[req_index]
             print("PALAK: req_index: ", req_index)
             print("PALAK: request: ", request)
-            
+
             num_new_tokens = (
                 request.num_tokens_with_spec
                 + request.num_output_placeholders
                 - request.num_computed_tokens
             )
+
+            print("PALAK: num_new_tokens: ", num_new_tokens)
+
             if 0 < self.scheduler_config.long_prefill_token_threshold < num_new_tokens:
                 num_new_tokens = self.scheduler_config.long_prefill_token_threshold
             num_new_tokens = min(num_new_tokens, token_budget)

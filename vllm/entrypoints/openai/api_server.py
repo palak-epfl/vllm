@@ -2017,5 +2017,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     validate_parsed_serve_args(args)
 
-    print("PALAK: starting run_server method")
     uvloop.run(run_server(args))

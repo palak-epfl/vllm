@@ -407,6 +407,9 @@ class Scheduler(SchedulerInterface):
         # skipped and put back at the head of the waiting queue later
         skipped_waiting_requests = create_request_queue(self.policy)
 
+        print("PALAK: skipped_waiting_requests: ", skipped_waiting_requests)
+        print("PALAK: preempted_reqs: ", preempted_reqs)
+
         # Next, schedule the WAITING requests.
         if not preempted_reqs:
             while self.waiting and token_budget > 0:

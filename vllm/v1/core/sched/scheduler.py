@@ -284,6 +284,7 @@ class Scheduler(SchedulerInterface):
             # Schedule newly needed KV blocks for the request.
             with record_function_or_nullcontext("schedule: allocate_slots"):
                 while True:
+                    print("PALAK: inside while loop record_function_or_nullcontext schedule: allocate_slots")
                     new_blocks = self.kv_cache_manager.allocate_slots(
                         request,
                         num_new_tokens,

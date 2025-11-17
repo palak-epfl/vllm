@@ -292,6 +292,8 @@ class Scheduler(SchedulerInterface):
                         num_new_tokens,
                         num_lookahead_tokens=self.num_lookahead_tokens,
                     )
+                    print("PALAK: new_blocks: ", new_blocks)
+                    print("PALAK: self.policy: ", self.policy)
 
                     if new_blocks is not None:
                         # The request can be scheduled.
@@ -329,6 +331,8 @@ class Scheduler(SchedulerInterface):
                             req_index -= 1
                     else:
                         preempted_req = self.running.pop()
+
+                    print("PALAK: len(self.running): ", len(self.running))
 
                     self.kv_cache_manager.free(preempted_req)
                     self.encoder_cache_manager.free(preempted_req)

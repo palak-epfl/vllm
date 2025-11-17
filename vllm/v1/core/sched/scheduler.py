@@ -412,7 +412,13 @@ class Scheduler(SchedulerInterface):
 
         # Next, schedule the WAITING requests.
         if not preempted_reqs:
+            print("PALAK: self.waiting: ", self.waiting)
+            print("PALAK: self.budget: ", token_budget)
             while self.waiting and token_budget > 0:
+                print("PALAK: self.waiting: ", self.waiting)
+                print("PALAK: self.budget: ", token_budget)
+                print("PALAK: self.running: ", self.running)
+                print("PALAK: self.max_num_running_reqs: ", self.max_num_running_reqs)
                 if len(self.running) == self.max_num_running_reqs:
                     break
 
@@ -708,6 +714,8 @@ class Scheduler(SchedulerInterface):
             finished_req_ids=self.finished_req_ids,
             free_encoder_mm_hashes=self.encoder_cache_manager.get_freed_mm_hashes(),
         )
+
+        print("PALAK: scheduler_output: ", scheduler_output)
 
         # NOTE(Kuntai): this function is designed for multiple purposes:
         # 1. Plan the KV cache store

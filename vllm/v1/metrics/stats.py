@@ -317,6 +317,7 @@ class IterationStats:
         max_tokens_param: int | None,
         req_stats: RequestStateStats,
     ):
+        print("PALAK: inside update from finished request")
         e2e_latency = self._time_since(req_stats.arrival_time)
 
         # Queued interval is from first QUEUED event to first SCHEDULED
@@ -354,6 +355,8 @@ class IterationStats:
             mean_time_per_output_token=mean_time_per_output_token,
             is_corrupted=req_stats.is_corrupted,
         )
+        print("PALAK: finished request: ", finished_req)
+        input("press enter to continue...")
         self.finished_requests.append(finished_req)
 
         # Count corrupted requests when they finish (only once per request)

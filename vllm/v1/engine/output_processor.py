@@ -430,6 +430,8 @@ class OutputProcessor:
         engine_core_timestamp: float | None = None,
         iteration_stats: IterationStats | None = None,
     ) -> OutputProcessorOutput:
+        print("PALAK: inside process_outputs method")
+        input("press enter to continuee...")
         """
         Process the EngineCoreOutputs:
         1) Compute stats for logging

@@ -109,6 +109,7 @@ class RequestState:
         n: int | None = None,
         temperature: float | None = None,
     ):
+        print("PALAK: inside requestState class")
         self.request_id = request_id
         self.parent_req = parent_req
         self.request_index = request_index
@@ -148,6 +149,7 @@ class RequestState:
         log_stats: bool,
         stream_interval: int,
     ) -> "RequestState":
+        print("PALAK: inside from_new_request method")
         if sampling_params := request.sampling_params:
             if not sampling_params.detokenize:
                 tokenizer = None
@@ -205,6 +207,7 @@ class RequestState:
         stop_reason: int | str | None,
         kv_transfer_params: dict[str, Any] | None = None,
     ) -> RequestOutput | PoolingRequestOutput | None:
+        print("PALAK: inside make_request_output method")
         finished = finish_reason is not None
         final_only = self.output_kind == RequestOutputKind.FINAL_ONLY
 
@@ -263,6 +266,7 @@ class RequestState:
         finished: bool,
         kv_transfer_params: dict[str, Any] | None = None,
     ) -> RequestOutput | PoolingRequestOutput:
+        print("PALAK: inside _new_request_output method")
         first_output = outputs[0]
         if isinstance(first_output, PoolingOutput):
             assert len(outputs) == 1
@@ -305,6 +309,7 @@ class RequestState:
         finish_reason: FinishReason | None,
         stop_reason: int | str | None,
     ) -> CompletionOutput:
+        print("PALAK: inside _new_completion_output method")
         assert self.detokenizer is not None
         assert self.logprobs_processor is not None
         finished = finish_reason is not None
@@ -343,6 +348,7 @@ class OutputProcessor:
     def __init__(
         self, tokenizer: AnyTokenizer, log_stats: bool, stream_interval: int = 1
     ):
+        print("PALAK: inside output processor init method")
         self.log_stats = log_stats
         self.tokenizer = tokenizer
         self.stream_interval = stream_interval
@@ -406,6 +412,7 @@ class OutputProcessor:
         request_index: int = 0,
         queue: RequestOutputCollector | None = None,
     ) -> None:
+        print("PALAK: inside output processor add_request method")
         request_id = request.request_id
         if request_id in self.request_states:
             raise ValueError(f"Request id {request_id} already running.")

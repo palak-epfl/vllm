@@ -176,7 +176,7 @@ class SchedulerStats:
 @dataclass
 class RequestStateStats:
     """Stats that need to be tracked across delta updates."""
-
+    print("PALAK: inside requestStateStats")
     num_generation_tokens: int = 0
 
     # This is an engine frontend timestamp (wall-clock)

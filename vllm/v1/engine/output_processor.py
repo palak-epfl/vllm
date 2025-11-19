@@ -199,7 +199,7 @@ class RequestState:
             log_stats=log_stats,
             stream_interval=stream_interval,
         )
-        print("PALAK: temp_cls: ", temp_cls)
+        print("PALAK: temp_cls: ", temp_cls, request.request_id, parent_req, request_index, output_kind, prompt, request.arrival_time, queue, log_stats, stream_interval)
         return temp_cls
 
     def make_request_output(
@@ -431,7 +431,7 @@ class OutputProcessor:
             log_stats=self.log_stats,
             stream_interval=self.stream_interval,
         )
-        print("PALAK: req_state: ", req_state)
+        print("PALAK: req_state: ", req_state, request, prompt, request_index, queue, self.log_stats, self.stream_interval)
         self.request_states[request_id] = req_state
         if parent_req:
             self.parent_requests[parent_req.request_id] = parent_req

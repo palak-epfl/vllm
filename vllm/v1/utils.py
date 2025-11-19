@@ -333,7 +333,7 @@ def report_usage_stats(
     vllm_config, usage_context: UsageContext = UsageContext.ENGINE_CONTEXT
 ) -> None:
     """Report usage statistics if enabled."""
-
+    print("PALAK: inside report_usage_stats method")
     if not is_usage_stats_enabled():
         return
 

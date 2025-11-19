@@ -197,7 +197,7 @@ class Scheduler(SchedulerInterface):
         # num_tokens_with_spec. This is general enough to cover
         # chunked prefills, prefix caching, speculative decoding,
         # and the "jump decoding" optimization in the future.
-        print("PALAK: \n\n\n\n")
+        print("PALAK: (some empty space) \n\n\n\n")
         print("PALAK: inside scheduler.py schedule method")
         scheduled_new_reqs: list[Request] = []
         scheduled_resumed_reqs: list[Request] = []
@@ -224,7 +224,7 @@ class Scheduler(SchedulerInterface):
         while req_index < len(self.running) and token_budget > 0:
             request = self.running[req_index]
             print("PALAK: req_index: ", req_index)
-            print("PALAK: request: ", request)
+            print("PALAK: request: ", request, " request id: ", request.request_id, " arrival time: ", request.arrival_time, " stop reason: ", request.stop_reason, " status: ", request.status, " num_computed_tokens: ", request.num_computed_tokens)
             print("PALAK: len(self.running): ", len(self.running))
 
             num_new_tokens = (
@@ -1348,7 +1348,6 @@ class Scheduler(SchedulerInterface):
         kv_connector_stats: KVConnectorStats | None = None,
     ) -> SchedulerStats | None:
         print("PALAK: make stats (IS THIS THE FUNCTION I HAVE BEEN LOOKING FOR?)")
-        print("PALAK: self.log_stats: ", self.log_stats)
         if not self.log_stats:
             return None
         prefix_cache_stats = self.kv_cache_manager.make_prefix_cache_stats()

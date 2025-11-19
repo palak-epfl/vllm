@@ -356,7 +356,6 @@ class IterationStats:
             is_corrupted=req_stats.is_corrupted,
         )
         print("PALAK: finished request: ", finished_req)
-        input("press enter to continue...")
         self.finished_requests.append(finished_req)
 
         # Count corrupted requests when they finish (only once per request)

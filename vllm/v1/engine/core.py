@@ -324,7 +324,7 @@ class EngineCore:
             return {}, False
         with record_function_or_nullcontext("core step: schedule"):
             scheduler_output = self.scheduler.schedule()
-            print("PALAK: scheduler_output: ", scheduler_output)
+            # print("PALAK: scheduler_output: ", scheduler_output)
 
         with record_function_or_nullcontext("core step: execute_model"):
             future = self.model_executor.execute_model(scheduler_output, non_block=True)

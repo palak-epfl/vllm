@@ -717,7 +717,7 @@ class Scheduler(SchedulerInterface):
             free_encoder_mm_hashes=self.encoder_cache_manager.get_freed_mm_hashes(),
         )
 
-        print("PALAK: scheduler_output: ", scheduler_output)
+        # print("PALAK: scheduler_output: ", scheduler_output)
 
         # NOTE(Kuntai): this function is designed for multiple purposes:
         # 1. Plan the KV cache store

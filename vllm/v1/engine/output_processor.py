@@ -258,9 +258,11 @@ class RequestState:
             if not outputs:
                 return None
 
-        return self._new_request_output(
+        temp_return = self._new_request_output(
             request_id, outputs, finished, kv_transfer_params
         )
+        print("PALAK: temp_return: ", temp_return)
+        return temp_return
 
     def _new_request_output(
         self,
@@ -431,7 +433,7 @@ class OutputProcessor:
             log_stats=self.log_stats,
             stream_interval=self.stream_interval,
         )
-        print("PALAK: req_state: ", req_state, request, prompt, request_index, queue, self.log_stats, self.stream_interval)
+        # print("PALAK: req_state: ", req_state, request, prompt, request_index, queue, self.log_stats, self.stream_interval)
         self.request_states[request_id] = req_state
         if parent_req:
             self.parent_requests[parent_req.request_id] = parent_req

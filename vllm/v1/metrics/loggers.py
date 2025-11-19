@@ -171,8 +171,6 @@ class LoggingStatLogger(StatLoggerBase):
         now = time.monotonic()
         prompt_throughput = self._get_throughput(self.num_prompt_tokens, now)
         generation_throughput = self._get_throughput(self.num_generation_tokens, now)
-        print("PALAK: prompt_throughput: ", prompt_throughput)
-        print("PALAK: generation_throughput: ", generation_throughput)
 
         self._reset(now)
         self.engine_is_idle = not any(
@@ -185,8 +183,6 @@ class LoggingStatLogger(StatLoggerBase):
         )
         self.last_generation_throughput = generation_throughput
         self.last_prompt_throughput = prompt_throughput
-        print("PALAK: last_prompt_throughput: ", self.last_prompt_throughput)
-        print("PALAK: last_generation_throughput: ", self.last_generation_throughput)
 
     def aggregate_scheduler_stats(self):
         # noop for per engine loggers
@@ -1160,6 +1156,7 @@ class StatLoggerManager:
         aggregate_engine_logging: bool = False,
         client_count: int = 1,
     ):
+        print("PALAK: inside StatLoggerManager init method")
         self.engine_indexes = engine_idxs if engine_idxs else [0]
         self.stat_loggers: list[AggregateStatLoggerBase] = []
         stat_logger_factories: list[StatLoggerFactory] = []
@@ -1209,6 +1206,9 @@ class StatLoggerManager:
         mm_cache_stats: MultiModalCacheStats | None = None,
         engine_idx: int | None = None,
     ):
+        print("PALAK: StatLoggerManager record method")
+        print("PALAK: scheduler_stats: ", scheduler_stats)
+        print("PALAK: iteration_stats: ", iteration_stats)
         if engine_idx is None:
             engine_idx = 0
         for logger in self.stat_loggers:

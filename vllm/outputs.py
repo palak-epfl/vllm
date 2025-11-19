@@ -129,6 +129,7 @@ class RequestOutput:
             logger.warning_once(
                 "RequestOutput: Ignoring extra arguments: %s", str(kwargs)
             )
+        print("PALAK: inside outputs.py RequestOutput method")
         self.request_id = request_id
         self.prompt = prompt
         self.prompt_token_ids = prompt_token_ids

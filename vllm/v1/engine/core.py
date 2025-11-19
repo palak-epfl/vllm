@@ -324,6 +324,7 @@ class EngineCore:
             return {}, False
         with record_function_or_nullcontext("core step: schedule"):
             scheduler_output = self.scheduler.schedule()
+            print("PALAK: scheduler_output: ", scheduler_output)
 
         with record_function_or_nullcontext("core step: execute_model"):
             future = self.model_executor.execute_model(scheduler_output, non_block=True)
@@ -337,6 +338,7 @@ class EngineCore:
             engine_core_outputs = self.scheduler.update_from_output(
                 scheduler_output, model_output
             )
+            print("PALAK: engine_core_outputs: ", engine_core_outputs)
 
         return engine_core_outputs, scheduler_output.total_num_scheduled_tokens > 0
 

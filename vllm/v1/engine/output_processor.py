@@ -72,6 +72,7 @@ class RequestOutputCollector:
 
     def get_nowait(self) -> RequestOutput | PoolingRequestOutput | None:
         """Non-blocking get operation."""
+        print("")
         output = self.output
         if output is not None:
             self.output = None
@@ -132,7 +133,7 @@ class RequestState:
         self.num_cached_tokens = 0
 
         self.stats = RequestStateStats(arrival_time=arrival_time) if log_stats else None
-
+        print("PALAK: self.stats: ", self.stats)
         # Stream Interval
         self.stream_interval = stream_interval
         self.sent_tokens_offset = 0  # Offset of sent tokens
@@ -176,7 +177,7 @@ class RequestState:
             assert request.pooling_params is not None
             output_kind = request.pooling_params.output_kind
 
-        return cls(
+        temp_cls = cls(
             request_id=request.request_id,
             parent_req=parent_req,
             request_index=request_index,
@@ -198,6 +199,8 @@ class RequestState:
             log_stats=log_stats,
             stream_interval=stream_interval,
         )
+        print("PALAK: temp_cls: ", temp_cls)
+        return temp_cls
 
     def make_request_output(
         self,
@@ -374,6 +377,7 @@ class OutputProcessor:
         self,
         request_ids: Iterable[str],
     ) -> list[str]:
+        print("PALAK: inside abort_requests method")
         request_ids_to_abort = []
         for request_id in request_ids:
             req_state = self.request_states.pop(request_id, None)
@@ -427,6 +431,7 @@ class OutputProcessor:
             log_stats=self.log_stats,
             stream_interval=self.stream_interval,
         )
+        print("PALAK: req_state: ", req_state)
         self.request_states[request_id] = req_state
         if parent_req:
             self.parent_requests[parent_req.request_id] = parent_req
@@ -438,7 +443,6 @@ class OutputProcessor:
         iteration_stats: IterationStats | None = None,
     ) -> OutputProcessorOutput:
         print("PALAK: inside process_outputs method")
-        input("press enter to continuee...")
         """
         Process the EngineCoreOutputs:
         1) Compute stats for logging
@@ -538,6 +542,7 @@ class OutputProcessor:
         )
 
     def update_scheduler_stats(self, scheduler_stats: SchedulerStats | None):
+        print("PALAK: inside update_scheduler_stats method")
         self.lora_states.update_scheduler_stats(scheduler_stats)
 
     def do_tracing(
@@ -546,6 +551,7 @@ class OutputProcessor:
         req_state: RequestState,
         iteration_stats: IterationStats | None,
     ) -> None:
+        print("PALAK: inside do_tracing method")
         assert req_state.stats is not None
         assert iteration_stats is not None
         assert self.tracer is not None
@@ -610,6 +616,7 @@ class OutputProcessor:
         engine_core_timestamp: float | None,
         iteration_stats: IterationStats | None,
     ):
+        print("PALAK: inside _update_stats_from_output method")
         if iteration_stats is None:
             return
 
@@ -631,6 +638,7 @@ class OutputProcessor:
         finish_reason: FinishReason | None,
         iteration_stats: IterationStats | None,
     ):
+        print("PALAK: inside _update_stats_from_finished method")
         if iteration_stats is None:
             return
 

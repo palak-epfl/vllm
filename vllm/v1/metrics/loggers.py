@@ -144,6 +144,8 @@ class LoggingStatLogger(StatLoggerBase):
         engine_idx: int = 0,
     ):
         """Log Stats to standard output."""
+        print("PALAK: inside loggers record method")
+        print("PALAK: iteraton_stats: ", iteration_stats)
         if iteration_stats:
             self._track_iteration_stats(iteration_stats)
 
@@ -165,9 +167,12 @@ class LoggingStatLogger(StatLoggerBase):
             self.mm_caching_metrics.observe(mm_cache_stats)
 
     def _update_stats(self):
+        print("PALAK: inside _update_stats method")
         now = time.monotonic()
         prompt_throughput = self._get_throughput(self.num_prompt_tokens, now)
         generation_throughput = self._get_throughput(self.num_generation_tokens, now)
+        print("PALAK: prompt_throughput: ", prompt_throughput)
+        print("PALAK: generation_throughput: ", generation_throughput)
 
         self._reset(now)
         self.engine_is_idle = not any(
@@ -180,6 +185,8 @@ class LoggingStatLogger(StatLoggerBase):
         )
         self.last_generation_throughput = generation_throughput
         self.last_prompt_throughput = prompt_throughput
+        print("PALAK: last_prompt_throughput: ", self.last_prompt_throughput)
+        print("PALAK: last_generation_throughput: ", self.last_generation_throughput)
 
     def aggregate_scheduler_stats(self):
         # noop for per engine loggers
@@ -274,6 +281,7 @@ class AggregatedLoggingStatLogger(LoggingStatLogger, AggregateStatLoggerBase):
             self.last_scheduler_stats_dict[engine_idx] = scheduler_stats
 
     def aggregate_scheduler_stats(self):
+        print("PALAK: inside loggers aggregate_scheduler_stats method")
         self.last_scheduler_stats = SchedulerStats()
         for last_scheduler_stats in self.last_scheduler_stats_dict.values():
             self.last_scheduler_stats.num_waiting_reqs += (
@@ -286,6 +294,8 @@ class AggregatedLoggingStatLogger(LoggingStatLogger, AggregateStatLoggerBase):
                 last_scheduler_stats.kv_cache_usage
             )
         self.last_scheduler_stats.kv_cache_usage /= len(self.last_scheduler_stats_dict)
+
+        print("PALAK: self.last_scheduler_stats: ", self.last_scheduler_stats)
 
     def log(self):
         LoggingStatLogger.log(self)

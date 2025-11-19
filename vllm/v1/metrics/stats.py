@@ -128,6 +128,7 @@ class PrefixCacheStats(BaseCacheStats):
 
     def record(self, num_tokens: int, num_hits: int, preempted: bool) -> None:
         """Aggregate request information into the stats."""
+        print("PALAK: inside prefixCacheStats record method")
         if preempted:
             # Previously preempted request
             self.preempted_requests += 1
